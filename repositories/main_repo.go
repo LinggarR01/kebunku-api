@@ -10,6 +10,7 @@ import (
 type CompRepository interface {
 	RegisterTanaman(data dto.Tanaman) error
 	GetTanaman() ([]dto.Tanaman, error)
+	UploadTanaman (file_url string, id string) error
 }
 
 type compRepository struct {
@@ -27,6 +28,18 @@ func NewComponentRepository(DB *sql.DB) *compRepository {
     class VARCHAR(255) NOT NULL,
     plant_order VARCHAR(255) NOT NULL,
     family VARCHAR(255) NOT NULL
+);
+
+		`)
+	if err != nil {
+		log.Fatalf("Error creating table: %v", err)
+	}
+
+	_, err = db.Exec(`
+    CREATE TABLE IF NOT EXISTS tanaman_image (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_tanaman INT NOT NULL,
+	file_url VARCHAR(255)
 );
 
 		`)

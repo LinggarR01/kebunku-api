@@ -26,6 +26,8 @@ func CompRouters(api *gin.RouterGroup) {
 	compService := services.NewService(compRepository)
 	compHandler := handlers.NewCompHandlers(compService)
 
+	api.Static("/tanaman", "./public/tanaman")
+
 	api.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -35,4 +37,6 @@ func CompRouters(api *gin.RouterGroup) {
 	api.POST("/register", compHandler.RegisterTanaman)
 
 	api.GET("/get", compHandler.GetTanaman)
+
+	api.POST("/upload", compHandler.UploadTanaman)
 }

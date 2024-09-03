@@ -8,6 +8,7 @@ import (
 type CompService interface {
 	RegisterTanaman(data dto.Tanaman) error
 	GetTanaman() ([]dto.Tanaman, error)
+	UploadTanaman(file_url string, id string) error
 }
 
 type compServices struct {
