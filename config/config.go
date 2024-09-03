@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/denisenkom/go-mssqldb"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
 
@@ -27,14 +27,11 @@ func InitDB() *sql.DB {
 	dbConfig := DBConfig{
 		User:     os.Getenv("DB_USER"),
 		Password: os.Getenv("DB_PASSWORD"),
-		Host:     os.Getenv("DB_HOST"),
-		Port:     os.Getenv("DB_PORT"),
-		Name:     os.Getenv("DB_NAME"),
 	}
 
-	dbURI := fmt.Sprintf("sqlserver://%s:%s@%s:%s?database=%s", dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Name)
+	dbURI := fmt.Sprintf("%s:%s@/kebunku", dbConfig.User, dbConfig.Password)
 
-	db, err := sql.Open("sqlserver", dbURI)
+	db, err := sql.Open("mysql", dbURI)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -16,19 +16,15 @@ func NewComponentRepository(DB *sql.DB) *compRepository {
 	db := config.InitDB()
 
 	_, err := db.Exec(`
-    BEGIN TRY
-        CREATE TABLE tanaman (
-            id INT IDENTITY(1,1) PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-			description VARCHAR(MAX),
-			class VARCHAR(255) NOT NULL,
-			order VARCHAR(255) NOT NULL,
-			family VARCHAR(255) NOT NULL,
-        )
-		END TRY
-		BEGIN CATCH
-			-- Ignore the error if the table already exists
-		END CATCH
+    CREATE TABLE IF NOT EXISTS tanaman (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    class VARCHAR(255) NOT NULL,
+    plant_order VARCHAR(255) NOT NULL,
+    family VARCHAR(255) NOT NULL
+);
+
 		`)
 	if err != nil {
 		log.Fatalf("Error creating table: %v", err)
