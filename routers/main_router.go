@@ -1,6 +1,10 @@
 package routers
 
 import (
+	"kebunku-api/config"
+	"kebunku-api/handlers"
+	"kebunku-api/repositories"
+	"kebunku-api/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,9 +22,15 @@ func CompRouters(api *gin.RouterGroup) {
 		c.Next()
 	})
 
+	compRepository := repositories.NewComponentRepository(config.InitDB())
+	compService := services.NewService(compRepository)
+	compHandler := handlers.NewCompHandlers(compService)
+
 	api.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
+
+	api.POST("/register", compHandler.RegisterTanaman)
 }
