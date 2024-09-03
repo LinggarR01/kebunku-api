@@ -25,3 +25,13 @@ func (h *compHandlers) RegisterTanaman(c *gin.Context) {
 	c.JSON(http.StatusOK, dto.Response{Body: data})
 
 }
+
+func (h *compHandlers) GetTanaman(c *gin.Context) {
+	data, err := h.service.GetTanaman()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.Response{Error: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, dto.Response{Body: data})
+}

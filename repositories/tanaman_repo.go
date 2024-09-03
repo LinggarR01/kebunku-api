@@ -10,3 +10,23 @@ func (r *compRepository) RegisterTanaman(data dto.Tanaman) error {
 
 	return nil
 }
+
+func (r *compRepository) GetTanaman() ([]dto.Tanaman, error) {
+	rows, err := r.DB.Query("SELECT id, name, description, class, plant_order, family FROM tanaman")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var result []dto.Tanaman
+	for rows.Next() {
+		var t dto.Tanaman
+		err := rows.Scan(&t.Id, &t.Name, &t.Description, &t.Class, &t.Order, &t.Family)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, t)
+	}
+
+	return result, nil
+}

@@ -33,4 +33,6 @@ func CompRouters(api *gin.RouterGroup) {
 	})
 
 	api.POST("/register", compHandler.RegisterTanaman)
+
+	api.GET("/get", compHandler.GetTanaman)
 }

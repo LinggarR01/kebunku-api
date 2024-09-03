@@ -7,8 +7,8 @@ import (
 
 type CompService interface {
 	RegisterTanaman(data dto.Tanaman) error
+	GetTanaman() ([]dto.Tanaman, error)
 }
-
 
 type compServices struct {
 	repo repositories.CompRepository

@@ -7,8 +7,9 @@ import (
 	"log"
 )
 
-type CompRepository interface{
+type CompRepository interface {
 	RegisterTanaman(data dto.Tanaman) error
+	GetTanaman() ([]dto.Tanaman, error)
 }
 
 type compRepository struct {
