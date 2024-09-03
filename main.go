@@ -12,7 +12,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-	  log.Fatal("Error loading .env file")
+		log.Fatal("Error loading .env file")
 	}
 
 	port := os.Getenv("PORT")
@@ -23,5 +23,5 @@ func main() {
 
 	routers.CompRouters(api)
 
-	r.Run(":" + port)
+	r.Run("localhost:" + port)
 }
