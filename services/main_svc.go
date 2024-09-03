@@ -1,11 +1,12 @@
 package services
 
 import (
+	"kebunku-api/dto"
 	"kebunku-api/repositories"
 )
 
 type CompService interface {
-
+	RegisterTanaman(data dto.Tanaman) error
 }
 
 

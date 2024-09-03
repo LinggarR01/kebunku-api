@@ -3,10 +3,13 @@ package repositories
 import (
 	"database/sql"
 	"kebunku-api/config"
+	"kebunku-api/dto"
 	"log"
 )
 
-type CompRepository interface{}
+type CompRepository interface{
+	RegisterTanaman(data dto.Tanaman) error
+}
 
 type compRepository struct {
 	DB *sql.DB
